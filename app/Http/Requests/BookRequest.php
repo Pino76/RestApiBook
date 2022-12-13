@@ -8,7 +8,7 @@ use Illuminate\Contracts\Validation\Validator;
 
 use Illuminate\Http\Request;
 
-class StoreBookRequest extends FormRequest
+class BookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
