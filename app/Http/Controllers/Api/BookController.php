@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
-use App\Http\Requests\StoreBookRequest;
+use App\Http\Requests\BookRequest;
 
 class BookController extends Controller
 {
@@ -40,15 +40,14 @@ class BookController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  BookRequest $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreBookRequest $request)
+    public function store(BookRequest $request)
     {
         $book = Book::create($request->all());
 
         return response()->json([
-            //s"aa" => $request->validate(),
             "status" => true,
             "message" => "Book created successful",
             "data" => $book
@@ -63,7 +62,11 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+       return response()->json([
+           "status" => true,
+           "message" => "book find",
+           "data" => $book
+       ], 200);
     }
 
     /**
@@ -84,9 +87,14 @@ class BookController extends Controller
      * @param  \App\Models\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book)
+    public function update(BookRequest $request, Book $book)
     {
-        //
+        $book->update($request->all());
+        return response()->json([
+            "status" => true,
+            "message" => "Book updated successfull",
+            "data" => $book
+        ], 200);
     }
 
     /**
@@ -97,6 +105,12 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+        return response()->json([
+            "status" => true,
+            "message" => "book deleted successfull",
+            "data" => $book
+        ], 200);
+
     }
 }
